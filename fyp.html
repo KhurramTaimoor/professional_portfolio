@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FYP Project | Khurram Taimoor</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+  * {margin:0; padding:0; box-sizing:border-box;}
+  body {font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height:1.6; color:#111; background:#fff;}
+  a {text-decoration:none; color:inherit;}
+  .navbar {width:100%; display:flex; justify-content:space-between; align-items:center; padding:15px 5%; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.1); flex-wrap:wrap;}
+  .logo {font-size:1.6rem; font-weight:bold; color:#0077b6;}
+  .nav-links {display:flex; gap:1rem;}
+  .nav-links a {color:#111; font-weight:500; transition:.3s;}
+  .nav-links a:hover {color:#0077b6;}
+  .hero {min-height:40vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:30px; background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), url('fyp-hero.jpg') no-repeat center/cover; background-size:cover;}
+  .hero h1 {font-size:2rem; color:#fff; margin-bottom:10px;}
+  .hero p {font-size:1rem; color:#fff;}
+  .section {padding:50px 5%;}
+  .section-title {font-size:1.5rem; text-align:center; margin-bottom:30px; color:#0077b6; position:relative;}
+  .section-title::after {content:''; display:block; width:50px; height:3px; background:#0077b6; margin:10px auto;}
+  .projects-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:15px;}
+  .project img {
+  width: 100%;
+  height: 220px;   /* Fixed height for all images */
+  object-fit: cover;  /* Ensures the image fills the box without distortion */
+  border-radius: 10px;
+  border: 1px solid #0077b6;
+}
+  .project-info {padding:10px;}
+  .footer {text-align:center; padding:15px; background:#f1f5f9; border-top:1px solid #0077b6; color:#555; font-size:0.9rem; margin-top:30px;}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="logo">Khurram</a>
+  <div class="nav-links">
+    <a href="portfolio.html">back to portfolio</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Web-Based Stolen Car Reporting System</h1>
+  <p>A Final Year Project (FYP) that integrates AI and CCTV feeds for vehicle theft reporting and detection.</p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Project Overview</h2>
+  <p>
+    This project introduces a <b>Web-Based Stolen Car Reporting System</b> designed to help users report stolen vehicles and track them using AI-powered license plate recognition from CCTV feeds. 
+    The system allows users to file complaints, register vehicles, and receive real-time alerts if their stolen car is detected. 
+    Built using <b>HTML, CSS, JavaScript, Node.js, Express, MySQL, and AI models</b>, this project provides a secure and efficient way to combat vehicle theft in Pakistan.
+  </p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Project Images</h2>
+  <div class="projects-grid">
+    <div class="project">
+      <img src="post.png" alt="FYP Dashboard">
+      <div class="project-info"><p>landing page with all details </p></div>
+    </div>
+    <div class="project">
+      <img src="dashboard.png" alt="Complaint Form">
+      <div class="project-info"><p>Web form to register and report stolen vehicles with details and images.</p></div>
+    </div>
+    <div class="project">
+      <img src="reborn.jpg" alt="AI Car Detection">
+      <div class="project-info"><p>AI-powered vehicle recognition from CCTV feeds.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>© 2025 Khurram Taimoor | Final Year Project | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

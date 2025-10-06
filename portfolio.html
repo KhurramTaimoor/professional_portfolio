@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khurram Taimoor | Full-Stack Developer</title>
+<style>
+  * {margin:0; padding:0; box-sizing:border-box;}
+  
+  :root {
+    --primary: #1a1a1a;
+    --accent: #d4af37;
+    --accent-light: #e5c158;
+    --text-dark: #0a0a0a;
+    --text-medium: #4a4a4a;
+    --text-light: #6a6a6a;
+    --bg-cream: #faf8f3;
+    --bg-light: #f5f1e8;
+    --border: #e8e4da;
+  }
+  
+  body {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    line-height:1.7; 
+    color: var(--text-dark);
+    background: var(--bg-cream);
+  }
+  
+  a {text-decoration:none; color:inherit;}
+  ul {list-style:none;}
+
+  html {scroll-behavior: smooth;}
+
+  /* Navbar */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width:100%; 
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center;
+    padding:25px 10%; 
+    background:rgba(250, 248, 243, 0.98);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    transition: all 0.4s ease;
+  }
+  
+  .navbar.scrolled {
+    padding: 20px 10%;
+    box-shadow:0 2px 20px rgba(0,0,0,0.05);
+  }
+  
+  .logo {
+    font-size:1.6rem; 
+    font-weight:600; 
+    color: var(--primary);
+    letter-spacing: 1px;
+    font-family: 'Cinzel', serif;
+  }
+  
+  .nav-links {
+    display:flex; 
+    gap:3rem;
+    align-items: center;
+  }
+  
+  .nav-links a {
+    color: var(--text-medium);
+    font-weight:400; 
+    font-size: 1rem;
+    transition:.4s;
+    cursor:pointer;
+    position: relative;
+    letter-spacing: 0.5px;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    transition: width 0.4s ease;
+  }
+  
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+  
+  .nav-links a:hover {color: var(--accent);}
+
+  .hamburger {
+    display:none; 
+    font-size:1.5rem; 
+    cursor:pointer;
+    color: var(--primary);
+  }
+  
+  @media(max-width:768px){
+    .navbar {padding: 20px 5%;}
+    .nav-links {
+      display:none; 
+      flex-direction:column; 
+      position: absolute;
+      top: 75px;
+      right: 5%;
+      background: var(--bg-cream);
+      padding: 25px;
+      border-radius: 5px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      gap: 1.2rem;
+      border: 1px solid var(--border);
+    }
+    .nav-links.show {display:flex;}
+    .hamburger {display:block;}
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height:100vh; 
+    display:flex; 
+    flex-direction:column; 
+    justify-content:center; 
+    align-items:center;
+    text-align:center; 
+    padding:0 10%;
+    margin-top: 80px;
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+    z-index: 0;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .hero h1 {
+    font-size:clamp(3rem,7vw,5rem); 
+    color:#fff; 
+    margin-bottom:20px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    font-family: 'Cinzel', serif;
+  }
+  
+  .hero .subtitle {
+    font-size:clamp(1.2rem,3vw,1.6rem); 
+    margin-bottom:15px; 
+    color: var(--accent);
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .hero .tagline {
+    font-size:clamp(1rem,2vw,1.2rem);
+    color:rgba(255,255,255,0.8);
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+  
+  .hero .btn {
+    display:inline-block; 
+    padding:16px 50px; 
+    border-radius:0;
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-weight:400; 
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    transition:.4s;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+  }
+  
+  .hero .btn:hover {
+    background: var(--accent);
+    color: var(--primary);
+  }
+
+  /* Sections */
+  .section {
+    padding:120px 10%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    font-size:3rem; 
+    text-align:center; 
+    margin-bottom:20px; 
+    color: var(--text-dark);
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-family: 'Cinzel', serif;
+  }
+  
+  .section-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 60px;
+  }
+  
+  .section-subtitle {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 60px;
+    font-style: italic;
+  }
+
+  /* About */
+  .about {background: var(--bg-cream);}
+  
+  .about-content {
+    display:grid; 
+    grid-template-columns:1fr 1.5fr; 
+    gap:80px; 
+    align-items:center;
+  }
+  
+  .about-img-wrapper {
+    position: relative;
+  }
+  
+  .about-img-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--accent);
+    z-index: -1;
+  }
+  
+  .about-content img {
+    width:100%; 
+    max-width: 400px;
+    height: auto;
+    display: block;
+    filter: grayscale(20%);
+    transition: all 0.4s ease;
+  }
+  
+  .about-content img:hover {
+    filter: grayscale(0%);
+  }
+  
+  .about-text h3 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 25px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-family: 'Cinzel', serif;
+  }
+  
+  .about-text p {
+    font-size:1.1rem; 
+    color: var(--text-medium);
+    margin-bottom: 25px;
+    line-height: 1.9;
+  }
+  
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+  }
+  
+  .stat-item {
+    text-align: center;
+    padding: 30px 20px;
+    background: transparent;
+    border: 1px solid var(--border);
+    transition: all 0.4s ease;
+  }
+  
+  .stat-item:hover {
+    background: white;
+    border-color: var(--accent);
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--accent);
+    font-family: 'Cinzel', serif;
+  }
+  
+  .stat-label {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+    font-family: 'Lato', sans-serif;
+  }
+
+  /* Skills */
+  .skills {background: var(--bg-light);}
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+  }
+  
+  .skill-card {
+    background: white;
+    padding: 45px 35px;
+    border: 1px solid var(--border);
+    transition: all 0.4s ease;
+    position: relative;
+  }
+  
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.4s ease;
+  }
+  
+  .skill-card:hover::before {
+    width: 100%;
+  }
+  
+  .skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  }
+  
+  .skill-icon {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 25px;
+  }
+  
+  .skill-card h3 {
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-family: 'Cinzel', serif;
+  }
+  
+  .skill-card ul {
+    list-style: none;
+  }
+  
+  .skill-card li {
+    color: var(--text-medium);
+    padding: 12px 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .skill-card li:last-child {
+    border-bottom: none;
+  }
+
+  /* Projects */
+  .projects {background: var(--bg-cream);}
+  
+  .projects-grid {
+    display:grid; 
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); 
+    gap:50px;
+  }
+  
+  .project {
+    background:#fff; 
+    overflow:hidden; 
+    border: 1px solid var(--border);
+    transition:.4s;
+    position: relative;
+  }
+  
+  .project::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(to top, rgba(26,26,26,0.05), transparent);
+    transition: height 0.4s ease;
+  }
+  
+  .project:hover::after {
+    height: 100%;
+  }
+  
+  .project:hover {
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+  
+  .project-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 260px;
+  }
+  
+  .project img {
+    width:100%; 
+    height:100%; 
+    object-fit:cover;
+    filter: grayscale(30%);
+    transition: all 0.6s ease;
+  }
+  
+  .project:hover img {
+    transform: scale(1.08);
+    filter: grayscale(0%);
+  }
+  
+  .project-info {
+    padding:35px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .project-info h3 {
+    margin-bottom:15px; 
+    color: var(--text-dark);
+    font-size:1.5rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-family: 'Cinzel', serif;
+  }
+  
+  .project-info p {
+    color: var(--text-medium);
+    font-size:1rem;
+    line-height: 1.7;
+  }
+  
+  .project-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: var(--accent);
+    font-weight: 400;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .project-link:hover {
+    color: var(--accent-light);
+    letter-spacing: 1.5px;
+  }
+
+  /* Contact */
+  .contact {
+    text-align: center;
+    padding: 120px 10%;
+    background: var(--bg-light);
+  }
+  
+  .contact-text {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    color: var(--text-medium);
+    font-size: 1.15rem;
+    line-height: 1.8;
+  }
+  
+  .contact-icons {
+    display:flex; 
+    justify-content:center; 
+    flex-wrap:wrap; 
+    gap:30px;
+    margin-top: 50px;
+  }
+  
+  .contact-icons a {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:1.5rem; 
+    color: var(--accent);
+    background: transparent;
+    border: 2px solid var(--accent);
+    border-radius: 0;
+    transition:.4s;
+  }
+  
+  .contact-icons a:hover {
+    background: var(--accent);
+    color: var(--primary);
+  }
+
+  /* Footer */
+  .footer {
+    text-align:center; 
+    padding:40px; 
+    background: var(--primary);
+    color: var(--bg-cream); 
+    font-size:0.95rem;
+    letter-spacing: 0.5px;
+    font-family: 'Lato', sans-serif;
+  }
+
+  /* Responsive */
+  @media(max-width:768px){
+    .section {padding: 80px 5%;}
+    .about-content {grid-template-columns:1fr;}
+    .about-img-wrapper::before {display: none;}
+    .about-stats {grid-template-columns: 1fr;}
+    .hero h1 {font-size:2.5rem;}
+    .section-title {font-size: 2.2rem; margin-bottom: 15px;}
+    .skills-grid {grid-template-columns: 1fr;}
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="logo">Khurram Taimoor</a>
+  <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Expertise</a></li>
+    <li><a href="#projects">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Khurram Taimoor</h1>
+    <p class="subtitle">Full-Stack Developer</p>
+    <p class="tagline">Crafting sophisticated digital experiences through elegant code, intelligent design, and innovative technology solutions</p>
+    <a href="#projects" class="btn">View Portfolio</a>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section about" id="about">
+  <h2 class="section-title">About</h2>
+  <div class="section-divider"></div>
+  <div class="about-content">
+    <div class="about-img-wrapper">
+      <img src="profile.jpg" alt="Khurram Taimoor">
+    </div>
+    <div class="about-text">
+      <h3>Developer & Innovator</h3>
+      <p>
+        With a refined approach to full-stack development, I specialize in creating sophisticated web solutions that seamlessly blend aesthetic elegance with technical excellence. My work is characterized by attention to detail, clean architecture, and a commitment to exceptional user experiences.
+      </p>
+      <p>
+        My expertise extends beyond traditional web development into the realms of Artificial Intelligence and Data Science, allowing me to integrate intelligent features and data-driven insights into every project. I believe in the power of technology to transform ideas into impactful digital realities.
+      </p>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Technologies</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Dedication</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="section skills" id="skills">
+  <h2 class="section-title">Expertise</h2>
+  <div class="section-divider"></div>
+  <p class="section-subtitle">A comprehensive mastery of modern development technologies</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon"><i class="fas fa-code"></i></div>
+      <h3>Web Development</h3>
+      <ul>
+        <li>HTML5 & CSS3</li>
+        <li>JavaScript (ES6+)</li>
+        <li>React.js</li>
+        <li>Node.js & Express.js</li>
+        <li>SQL & MongoDB</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon"><i class="fas fa-brain"></i></div>
+      <h3>Artificial Intelligence</h3>
+      <ul>
+        <li>Computer Vision</li>
+        <li>Model Training</li>
+        <li>Neural Networks</li>
+        <li>Machine Learning</li>
+        <li>AI Integration</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Data Science</h3>
+      <ul>
+        <li>Data Analysis</li>
+        <li>Classification & Regression</li>
+        <li>Optimization Techniques</li>
+        <li>Statistical Modeling</li>
+        <li>Data Visualization</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="section projects" id="projects">
+  <h2 class="section-title">Portfolio</h2>
+  <div class="section-divider"></div>
+  <p class="section-subtitle">Selected works showcasing innovation and craftsmanship</p>
+  <div class="projects-grid">
+    <div class="project">
+      <div class="project-img-wrapper">
+        <img src="dine.jpg" alt="Restaurant Website">
+      </div>
+      <div class="project-info">
+        <h3>Restaurant Website</h3>
+        <p>An elegant, responsive dining experience platform featuring sophisticated menu presentation, promotional content, and seamless contact integration. Engineered for optimal performance and user engagement.</p>
+        <a href="restaurant.html" class="project-link">Explore Project →</a>
+      </div>
+    </div>
+    
+    <div class="project">
+      <div class="project-img-wrapper">
+        <img src="post.png" alt="Anti-Theft System">
+      </div>
+      <div class="project-info">
+        <h3>Anti-Theft Vehicle System</h3>
+        <p>An intelligent security platform leveraging advanced AI and computer vision technologies for vehicle theft prevention and recovery. Features real-time CCTV monitoring, automated alerts, and comprehensive reporting capabilities.</p>
+        <a href="fyp.html" class="project-link">Explore Project →</a>
+      </div>
+    </div>
+
+</section>
+
+<!-- Contact -->
+<section class="section contact" id="contact">
+  <h2 class="section-title">Connect</h2>
+  <div class="section-divider"></div>
+  <p class="contact-text">
+    I welcome opportunities for collaboration, innovative projects, and meaningful professional connections. Whether you have a vision to bring to life or simply wish to discuss possibilities, I invite you to reach out.
+  </p>
+  <div class="contact-icons">
+    <a href="mailto:yourprofessionalemail@example.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+    <a href="https://github.com/yourusername" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/yourprofile" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>© 2025 Khurram Taimoor. All Rights Reserved.</p>
+</footer>
+
+<script>
+  function toggleMenu(){
+    document.getElementById('navLinks').classList.toggle('show');
+  }
+  
+  window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+  
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('show');
+    });
+  });
+</script>
+</body>
+</html>
